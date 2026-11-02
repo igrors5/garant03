@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Согласие на обработку персональных данных — Гарант</title>
+<style>
+  :root{
+    --text:#1d1d1f; --muted:#6e6e73; --line:#e5e5e7;
+    --accent:#2bba5e; --accent-hover:#219b4c; --accent-light:#e8f8ee;
+    --bg-card:#fbfbfd;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:#fff;color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6;
+  }
+  .bg-shapes{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;}
+  .shape{position:absolute;border-radius:50%;filter:blur(80px);opacity:.4;}
+  .shape-1{width:400px;height:400px;background:rgba(43,186,94,.3);top:-100px;left:-100px;}
+  .shape-2{width:350px;height:350px;background:rgba(100,210,255,.2);bottom:-100px;right:-100px;}
+
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
+
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(255,255,255,.8);backdrop-filter:saturate(180%) blur(20px);
+    -webkit-backdrop-filter:saturate(180%) blur(20px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    max-width:820px;margin:0 auto;padding:0 24px;height:64px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo-link{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
+  .logo-img{height:26px;width:auto;object-fit:contain;mix-blend-mode:multiply}
+  .logo{font-size:17px;font-weight:600;letter-spacing:-.02em}
+  .logo span{color:var(--muted)}
+  .back-btn{
+    font-size:14px;font-weight:500;color:#fff;background:var(--accent);
+    border-radius:980px;padding:8px 16px;transition:background .2s;text-decoration:none;
+  }
+  .back-btn:hover{background:var(--accent-hover);text-decoration:none}
+
+  main{padding:48px 0 80px}
+  .page-tag{display:inline-block;background:var(--accent-light);color:var(--accent-hover);font-size:13px;font-weight:600;padding:6px 14px;border-radius:980px;margin-bottom:18px;}
+  h1{font-size:clamp(28px,5vw,38px);font-weight:600;letter-spacing:-.03em;line-height:1.15;margin-bottom:8px;}
+  .updated{font-size:14px;color:var(--muted);margin-bottom:32px;}
+
+  .doc{background:rgba(251,251,253,.85);backdrop-filter:blur(20px);border:1px solid var(--line);border-radius:24px;padding:32px 28px;box-shadow:0 10px 40px rgba(0,0,0,.02);}
+  .doc h2{font-size:18px;font-weight:600;margin-top:28px;margin-bottom:10px;letter-spacing:-.01em;}
+  .doc h2:first-child{margin-top:0}
+  .doc p{font-size:15px;color:var(--text);margin-bottom:10px;}
+  .doc p.note{color:var(--muted);font-size:14px;}
+  .doc ul,.doc ol{margin:0 0 12px 20px;font-size:15px;}
+  .doc li{margin-bottom:6px;}
+  .doc strong{font-weight:600}
+
+  footer{border-top:1px solid var(--line);padding:28px 0;text-align:center;font-size:14px;color:var(--muted);position:relative;z-index:1;}
+  footer a{color:var(--muted);margin:0 10px}
+  footer a:hover{color:var(--accent);text-decoration:none}
+  @media(max-width:600px){.doc{padding:24px 18px;border-radius:18px}}
+</style>
+</head>
+<body>
+
+<div class="bg-shapes">
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+</div>
+
+<header>
+  <nav class="nav">
+    <a href="index.html" class="logo-link">
+      <img src="icons/logo.png" alt="Гарант" class="logo-img">
+      <span class="logo">Гарант<span>.</span></span>
+    </a>
+    <a href="index.html" class="back-btn">← На главную</a>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="page-tag">Документы</div>
+    <h1>Согласие на обработку персональных данных</h1>
+    <p class="updated">Редакция от 11 сентября 2026</p>
+
+    <div class="doc">
+      <p>Настоящим я, субъект персональных данных (далее — «Пользователь»), во исполнение требований Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных», свободно, своей волей и в своём интересе даю согласие ИП / ООО «Гарант» (далее — «Оператор») на обработку моих персональных данных на условиях, изложенных ниже.</p>
+
+      <h2>1. Перечень персональных данных</h2>
+      <p>Пользователь даёт согласие на обработку следующих категорий персональных данных:</p>
+      <ul>
+        <li>фамилия, имя;</li>
+        <li>контактный номер телефона;</li>
+        <li>адрес электронной почты;</li>
+        <li>сведения о заказе (модель устройства, объём памяти, цвет, цена).</li>
+      </ul>
+
+      <h2>2. Цели обработки</h2>
+      <p>Обработка персональных данных осуществляется в следующих целях:</p>
+      <ul>
+        <li>оформление и подтверждение заказа;</li>
+        <li>связь с Пользователем по вопросам заказа (по телефону и/или электронной почте);</li>
+        <li>организация доставки товара или оказания услуги;</li>
+        <li>предоставление информации о статусе заказа;</li>
+        <li>исполнение требований законодательства Российской Федерации.</li>
+      </ul>
+
+      <h2>3. Перечень действий с персональными данными</h2>
+      <p>Пользователь даёт согласие на совершение следующих действий с персональными данными: сбор, запись, систематизация, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передача (предоставление, доступ), блокирование, удаление, уничтожение.</p>
+      <p>Обработка персональных данных осуществляется как с использованием средств автоматизации, так и без использования таких средств.</p>
+
+      <h2>4. Срок действия согласия</h2>
+      <p>Согласие действует с момента его предоставления и до достижения целей обработки персональных данных либо до его отзыва Пользователем.</p>
+
+      <h2>5. Порядок отзыва согласия</h2>
+      <p>Пользователь вправе в любой момент отозвать настоящее согласие путём направления Оператору письменного уведомления по адресу электронной почты, указанному в контактных данных на сайте. После отзыва согласия Оператор прекращает обработку персональных данных и уничтожает их в срок, не превышающий 30 (тридцати) дней с даты получения отзыва, если иное не предусмотрено законодательством РФ.</p>
+      <p class="note">Отзыв согласия не распространяется на обработку персональных данных, которая требуется для исполнения заключённого договора или предусмотрена законом.</p>
+
+      <h2>6. Права субъекта персональных данных</h2>
+      <p>Пользователь имеет право:</p>
+      <ul>
+        <li>получать сведения, касающиеся обработки его персональных данных;</li>
+        <li>требовать уточнения, блокирования или уничтожения данных, если они являются неполными, устаревшими, неточными или незаконно полученными;</li>
+        <li>обжаловать действия или бездействие Оператора в уполномоченный орган по защите прав субъектов персональных данных (Роскомнадзор) или в суд.</li>
+      </ul>
+
+      <h2>7. Передача третьим лицам</h2>
+      <p>Оператор вправе передавать персональные данные третьим лицам исключительно в целях исполнения заказа (службам доставки, платёжным провайдерам) или в случаях, прямо предусмотренных законодательством Российской Федерации. Передача данных осуществляется в объёме, минимально необходимом для достижения соответствующей цели.</p>
+
+      <h2>8. Заключительные положения</h2>
+      <p>Пользователь подтверждает, что ознакомлен с настоящим Согласием, его содержание ему понятно, и что предоставленные им персональные данные являются достоверными.</p>
+      <p>Пользователь также ознакомлен с <a href="privacy.html">Политикой конфиденциальности</a> и принимает её условия.</p>
+      <p class="note">Актуальная версия настоящего Согласия публикуется на данной странице. Оператор вправе вносить изменения; продолжение использования сайта означает согласие с новой редакцией.</p>
+
+      <h2>9. Контакты Оператора</h2>
+      <p>Телефон: <a href="tel:+79841014875">+7 (984) 101-48-75</a><br>
+      Электронная почта: <a href="mailto:info@example.ru">info@example.ru</a></p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="index.html">Главная</a>
+    <a href="terms.html">Согласие на обработку ПД</a>
+    <a href="privacy.html">Конфиденциальность</a>
+    <p style="margin-top:12px">© 2026 Гарант. Продажа и ремонт техники Apple.</p>
+  </div>
+</footer>
+
+</body>
+</html>

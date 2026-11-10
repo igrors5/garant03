@@ -314,10 +314,6 @@ function productImage(string $product, array $map): string {
 
 $allUsers = users_all();
 $canManageStaff = users_can_do($currentUser, 'staff.manage');
-$canViewNews    = users_can_do($currentUser, 'news.view');
-$canCreateNews  = users_can_do($currentUser, 'news.create');
-$canEditNews    = users_can_do($currentUser, 'news.edit');
-$canDeleteNews  = users_can_do($currentUser, 'news.delete');
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -450,8 +446,6 @@ transition:background .2s,color .2s;
 .badge.status-processing{background:var(--blue-light);color:#1e4f9a}
 .badge.status-done{background:var(--accent-light);color:#166b38}
 .badge.status-cancelled{background:var(--danger-light);color:#9b1c20}
-.badge.status-draft{background:#f0f0f2;color:var(--muted)}
-.badge.status-published{background:var(--accent-light);color:#166b38}
 .empty{text-align:center;padding:60px 20px;color:var(--muted);background:var(--card);border:1px dashed var(--line);border-radius:16px}
 
 .settings-list{display:flex;flex-direction:column;gap:0}
@@ -461,28 +455,26 @@ transition:background .2s,color .2s;
 .settings-row .value{font-size:14px;color:var(--muted);word-break:break-all}
 .settings-row .value.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px}
 
-.staff-alert,.news-alert{padding:14px 16px;border-radius:12px;margin-bottom:16px;font-size:14px;display:flex;align-items:center;gap:10px}
-.staff-alert.ok,.news-alert.ok{background:var(--accent-light);color:#166b38;border:1px solid rgba(43,186,94,.2)}
-.staff-alert.err,.news-alert.err{background:var(--danger-light);color:#9b1c20;border:1px solid rgba(229,72,77,.25)}
+.staff-alert{padding:14px 16px;border-radius:12px;margin-bottom:16px;font-size:14px;display:flex;align-items:center;gap:10px}
+.staff-alert.ok{background:var(--accent-light);color:#166b38;border:1px solid rgba(43,186,94,.2)}
+.staff-alert.err{background:var(--danger-light);color:#9b1c20;border:1px solid rgba(229,72,77,.25)}
 
-.staff-form,.news-form{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:20px}
-.staff-form-title,.news-form-title{font-size:16px;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:10px}
-.staff-form-title .mode-badge,.news-form-title .mode-badge{font-size:11px;font-weight:500;padding:3px 10px;border-radius:8px;background:var(--accent-light);color:#166b38}
+.staff-form{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:20px}
+.staff-form-title{font-size:16px;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.staff-form-title .mode-badge{font-size:11px;font-weight:500;padding:3px 10px;border-radius:8px;background:var(--accent-light);color:#166b38}
 .staff-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:700px){.staff-form-grid{grid-template-columns:1fr}}
-.staff-field,.news-field{display:flex;flex-direction:column;gap:6px}
-.staff-field label,.news-field label{font-size:13px;font-weight:500;color:var(--muted)}
-.staff-field input,.staff-field select,.news-field input,.news-field select,.news-field textarea{
+.staff-field{display:flex;flex-direction:column;gap:6px}
+.staff-field label{font-size:13px;font-weight:500;color:var(--muted)}
+.staff-field input,.staff-field select{
 border:1px solid var(--line);border-radius:10px;padding:10px 12px;
 font-size:14px;font-family:inherit;background:#fbfbfd;color:var(--text);
 transition:border-color .2s,box-shadow .2s;
 }
-.news-field textarea{min-height:120px;resize:vertical;line-height:1.5}
-.staff-field input:focus,.staff-field select:focus,
-.news-field input:focus,.news-field select:focus,.news-field textarea:focus{
+.staff-field input:focus,.staff-field select:focus{
 outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light);
 }
-.staff-field .hint,.news-field .hint{font-size:11px;color:var(--muted);margin-top:2px}
+.staff-field .hint{font-size:11px;color:var(--muted);margin-top:2px}
 .staff-perms{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
 @media(max-width:700px){.staff-perms{grid-template-columns:1fr}}
 .perm-block{background:#fbfbfd;border:1px solid var(--line);border-radius:12px;padding:14px}
@@ -492,7 +484,7 @@ outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light)
 .perm-item{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:13px}
 .perm-item input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:pointer}
 .perm-item label{cursor:pointer;flex:1}
-.staff-form-actions,.news-form-actions{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.staff-form-actions{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
 
 .btn{border:none;border-radius:980px;padding:10px 18px;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;transition:background .2s,opacity .2s}
 .btn-accept{background:var(--accent);color:#fff}
@@ -505,7 +497,7 @@ outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light)
 .btn-warn:hover{background:var(--warn-light)}
 .btn[disabled]{opacity:.5;cursor:not-allowed}
 
-.staff-table,.news-table{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.staff-table{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
 .staff-table-head,.staff-table-row{display:grid;grid-template-columns:1.2fr 1.4fr 1fr 1.3fr 1.3fr 140px 110px;gap:12px;align-items:center;padding:12px 16px}
 .staff-table-head{background:#fbfbfd;border-bottom:1px solid var(--line);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:600}
 .staff-table-row{border-bottom:1px solid var(--line);font-size:13px}
@@ -516,7 +508,6 @@ outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light)
 .staff-cell .mini-badges{display:flex;flex-wrap:wrap;gap:4px}
 .mini-badge{font-size:10px;padding:2px 7px;border-radius:6px;background:#f0f0f2;color:var(--muted);font-weight:500}
 .mini-badge.role-admin{background:var(--accent-light);color:#166b38}
-.mini-badge.role-editor{background:#f3e8ff;color:#6b21a8}
 .mini-badge.role-operator{background:var(--blue-light);color:#1e4f9a}
 .mini-badge.role-viewer{background:#f0f0f2;color:var(--muted)}
 .staff-actions{display:flex;gap:6px}
@@ -525,30 +516,15 @@ outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light)
 .icon-btn.danger:hover{background:var(--danger-light);color:#9b1c20}
 .staff-you{font-size:10px;color:var(--accent);margin-left:4px;font-weight:500}
 
-/* ---------- News ---------- */
-.news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
-.news-card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .2s,transform .2s}
-.news-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.06);transform:translateY(-2px)}
-.news-card-img{aspect-ratio:16/10;background:#f0f0f2;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.news-card-img img{width:100%;height:100%;object-fit:cover}
-.news-card-img .placeholder{color:var(--muted);font-size:13px}
-.news-card-body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
-.news-card-title{font-size:16px;font-weight:600;letter-spacing:-.01em;line-height:1.3}
-.news-card-sub{font-size:13px;color:var(--muted);line-height:1.4}
-.news-card-meta{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--muted);margin-top:auto;padding-top:8px}
-.news-card-actions{display:flex;gap:6px;padding:0 16px 16px;flex-wrap:wrap}
-.news-card-actions .btn{padding:6px 14px;font-size:12px}
-
-/* Image uploader */
-.img-uploader{display:flex;flex-direction:column;gap:10px}
-.img-source-tabs{display:flex;gap:6px}
-.img-source-tab{padding:6px 14px;border-radius:8px;border:1px solid var(--line);background:#fff;font-size:12px;font-weight:500;cursor:pointer;color:var(--muted);font-family:inherit;transition:all .15s}
-.img-source-tab.active{background:var(--accent-light);color:#166b38;border-color:transparent}
-.img-preview{width:100%;max-width:240px;aspect-ratio:16/10;border-radius:12px;overflow:hidden;background:#f0f0f2;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px}
-.img-preview img{width:100%;height:100%;object-fit:cover}
-.img-preview.empty{border-style:dashed}
-.img-upload-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.img-upload-row input[type=file]{font-size:12px}
+/* ---------- Cart ---------- */
+.cart-list{display:flex;flex-direction:column;gap:12px}
+.cart-item{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.cart-item-info{min-width:0;flex:1}
+.cart-item-title{font-size:15px;font-weight:600;margin-bottom:4px}
+.cart-item-meta{font-size:13px;color:var(--muted)}
+.cart-item-items{font-size:13px;color:var(--text);margin-top:6px}
+.cart-item-total{font-size:18px;font-weight:600;white-space:nowrap;letter-spacing:-.01em}
+.cart-item-actions{display:flex;gap:8px;align-items:center}
 
 .view{display:none}
 .view.active{display:block;animation:fade .25s ease}
@@ -621,12 +597,6 @@ outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light)
 <button class="side-item" data-view="orders">
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
 Заявки
-</button>
-<?php endif; ?>
-<?php if (users_can_view($currentUser, 'news')): ?>
-<button class="side-item" data-view="news">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6z"/></svg>
-Новости
 </button>
 <?php endif; ?>
 <?php if (users_can_view($currentUser, 'staff')): ?>
@@ -769,84 +739,6 @@ $dateShort = !empty($o['created_at']) ? date('d.m.Y H:i', strtotime($o['created_
 </section>
 <?php endif; ?>
 
-<!-- ===== NEWS ===== -->
-<?php if (users_can_view($currentUser, 'news')): ?>
-<section class="view" id="view-news">
-<div class="main-head">
-<div><h1>Новости</h1><p>Управление публикациями на сайте</p></div>
-<div style="font-size:13px;color:var(--muted)" id="newsCounter">Всего: —</div>
-</div>
-
-<div id="newsAlert"></div>
-
-<?php if ($canCreateNews || $canEditNews): ?>
-<div class="news-form" id="newsForm">
-<div class="news-form-title">
-<span id="newsFormTitle">Новая публикация</span>
-<span class="mode-badge" id="newsModeBadge">создание</span>
-</div>
-<form id="newsFormEl" autocomplete="off">
-<input type="hidden" name="id" id="nf-id" value="">
-
-<div class="staff-form-grid">
-<div class="news-field">
-<label for="nf-title">Заголовок *</label>
-<input type="text" id="nf-title" name="title" required maxlength="200" placeholder="Например: Новая поставка iPhone 17">
-</div>
-<div class="news-field">
-<label for="nf-subtitle">Подзаголовок</label>
-<input type="text" id="nf-subtitle" name="subtitle" maxlength="300" placeholder="Краткое описание для превью">
-</div>
-</div>
-
-<div class="news-field" style="margin-top:14px">
-<label for="nf-description">Описание</label>
-<textarea id="nf-description" name="description" placeholder="Полный текст новости..."></textarea>
-</div>
-
-<div class="news-field" style="margin-top:14px">
-<label>Картинка</label>
-<div class="img-uploader">
-<div class="img-source-tabs">
-<button type="button" class="img-source-tab active" data-src="upload">Загрузить файл</button>
-<button type="button" class="img-source-tab" data-src="url">Указать URL</button>
-</div>
-<div class="img-upload-row" id="imgUploadRow">
-<input type="file" id="nf-file" accept="image/jpeg,image/png,image/webp,image/gif">
-<div class="hint" style="margin:0">JPG, PNG, WEBP, GIF · до 5 МБ</div>
-</div>
-<div class="img-upload-row" id="imgUrlRow" style="display:none">
-<input type="url" id="nf-url" placeholder="https://..." style="flex:1;min-width:200px">
-</div>
-<input type="hidden" id="nf-image" name="image" value="">
-<div class="img-preview empty" id="imgPreview">
-<span>Нет картинки</span>
-</div>
-</div>
-</div>
-
-<div class="staff-form-grid" style="margin-top:14px">
-<div class="news-field">
-<label for="nf-status">Статус</label>
-<select id="nf-status" name="status">
-<option value="draft">Черновик (не опубликовано)</option>
-<option value="published">Опубликовано</option>
-</select>
-</div>
-</div>
-
-<div class="news-form-actions">
-<button type="submit" class="btn btn-accept" id="newsSubmitBtn">Создать</button>
-<button type="button" class="btn btn-ghost" id="newsCancelBtn">Отмена</button>
-</div>
-</form>
-</div>
-<?php endif; ?>
-
-<div id="newsList" class="news-grid"></div>
-</section>
-<?php endif; ?>
-
 <!-- ===== STAFF ===== -->
 <?php if (users_can_view($currentUser, 'staff')): ?>
 <section class="view" id="view-staff">
@@ -877,7 +769,7 @@ $dateShort = !empty($o['created_at']) ? date('d.m.Y H:i', strtotime($o['created_
 <div class="staff-form-grid">
 <div class="staff-field">
 <label for="sf-username">Логин *</label>
-<input type="text" id="sf-username" name="username" required pattern="[a-zA-Z0-9._\-]{3,32}" placeholder="например, editor1">
+<input type="text" id="sf-username" name="username" required pattern="[a-zA-Z0-9._\-]{3,32}" placeholder="например, operator1">
 <div class="hint">3–32 символа, латиница, цифры, . _ -</div>
 </div>
 <div class="staff-field">
@@ -995,6 +887,14 @@ $isYou = ($u['username'] === $currentUser['username']);
 </div>
 </div>
 <div class="panel">
+<div class="panel-head"><div class="panel-title">Хранилище корзин</div></div>
+<div class="settings-list">
+<div class="settings-row"><div class="label">Файл</div><div class="value mono">Корзины.json</div></div>
+<div class="settings-row"><div class="label">Существует</div><div class="value"><?= is_file(__DIR__ . '/Корзины.json') ? 'Да' : 'Нет' ?></div></div>
+<div class="settings-row"><div class="label">Экспорт</div><div class="value"><?php if (is_file(__DIR__ . '/Корзины.json')): ?><a href="Корзины.json" download class="btn btn-accept" style="display:inline-block;padding:8px 18px;flex:none">Скачать .json</a><?php else: ?>—<?php endif; ?></div></div>
+</div>
+</div>
+<div class="panel">
 <div class="panel-head"><div class="panel-title">Безопасность</div></div>
 <div class="settings-list">
 <div class="settings-row"><div class="label">Аутентификация</div><div class="value">Логин + пароль (сессия)</div></div>
@@ -1060,13 +960,6 @@ const ORDERS = <?= json_encode(array_map(function($o) use ($productImages) {
 const STATUS_LABELS = { new:'Новая', processing:'В обработке', done:'Принята', cancelled:'Отклонена' };
 const ROLE_PRESETS = <?= json_encode(ROLE_PRESETS, JSON_UNESCAPED_UNICODE) ?>;
 const ROLE_ACTION_PRESETS = <?= json_encode(ROLE_ACTION_PRESETS, JSON_UNESCAPED_UNICODE) ?>;
-
-const NEWS_PERMS = {
-    view:   <?= $canViewNews   ? 'true' : 'false' ?>,
-    create: <?= $canCreateNews ? 'true' : 'false' ?>,
-    edit:   <?= $canEditNews   ? 'true' : 'false' ?>,
-    del:    <?= $canDeleteNews ? 'true' : 'false' ?>,
-};
 
 const modal       = document.getElementById('orderModal');
 const modalClose  = document.getElementById('modalClose');
@@ -1135,6 +1028,7 @@ function switchView(name, updateHash = true){
     if (updateHash) {
         history.replaceState(null, '', name === 'dashboard' ? 'admin.php' : 'admin.php?view=' + name);
     }
+    if (name === 'cart') loadCarts();
 }
 sideButtons.forEach(btn => { btn.addEventListener('click', () => switchView(btn.dataset.view)); });
 (function(){
@@ -1142,6 +1036,50 @@ sideButtons.forEach(btn => { btn.addEventListener('click', () => switchView(btn.
     const view = params.get('view') || 'dashboard';
     switchView(view, false);
 })();
+
+/* ---------- Корзины клиентов ---------- */
+function escapeHtml(s){
+    return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+async function loadCarts(){
+    const el = document.getElementById('cartList');
+    if (!el) return;
+    try {
+        const res = await fetch('cart.php?action=all');
+        const data = await res.json();
+        if (!data.ok) {
+            el.innerHTML = '<div class="empty">Ошибка: ' + escapeHtml(data.error || '') + '</div>';
+            return;
+        }
+        const items = data.items || [];
+        document.getElementById('cartCounter').textContent = 'Всего: ' + items.length;
+        if (!items.length){
+            el.innerHTML = '<div class="empty">Корзин пока нет.</div>';
+            return;
+        }
+        el.innerHTML = items.map(c => {
+            const rows = (c.items || []).map(i =>
+                `<div>${escapeHtml(i.model)} ${escapeHtml(i.memory)} ${escapeHtml(i.color)} — ${(i.price||0).toLocaleString('ru-RU')} ₽ × ${i.qty||1}</div>`
+            ).join('');
+            return `
+                <div class="cart-item">
+                    <div class="cart-item-info">
+                        <div class="cart-item-title">Корзина #${escapeHtml(c.id)}</div>
+                        <div class="cart-item-meta">
+                            ${escapeHtml(c.customer || 'Гость')} · ${escapeHtml(c.phone || '—')}
+                            ${c.created_at ? ' · ' + escapeHtml(c.created_at) : ''}
+                        </div>
+                        <div class="cart-item-items">${rows}</div>
+                    </div>
+                    <div class="cart-item-total">${(c.total||0).toLocaleString('ru-RU')} ₽</div>
+                </div>
+            `;
+        }).join('');
+    } catch(e){
+        el.innerHTML = '<div class="empty">Не удалось загрузить корзины.</div>';
+    }
+}
+if (document.getElementById('view-cart')) loadCarts();
 
 /* ---------- Логика вкладки «Сотрудники» ---------- */
 const staffForm      = document.getElementById('staffForm');
@@ -1219,315 +1157,6 @@ document.querySelectorAll('.staff-edit').forEach(btn => {
         staffForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 });
-
-/* ============================================================
-   ЛОГИКА ВКЛАДКИ «НОВОСТИ»
-   ============================================================ */
-const newsForm      = document.getElementById('newsForm');
-const newsFormEl    = document.getElementById('newsFormEl');
-const newsFormTitle = document.getElementById('newsFormTitle');
-const newsModeBadge = document.getElementById('newsModeBadge');
-const newsSubmitBtn = document.getElementById('newsSubmitBtn');
-const newsCancelBtn = document.getElementById('newsCancelBtn');
-const newsAlert     = document.getElementById('newsAlert');
-const newsList      = document.getElementById('newsList');
-const newsCounter   = document.getElementById('newsCounter');
-
-const nfId          = document.getElementById('nf-id');
-const nfTitle       = document.getElementById('nf-title');
-const nfSubtitle    = document.getElementById('nf-subtitle');
-const nfDescription = document.getElementById('nf-description');
-const nfImage       = document.getElementById('nf-image');
-const nfFile        = document.getElementById('nf-file');
-const nfUrl         = document.getElementById('nf-url');
-const imgPreview    = document.getElementById('imgPreview');
-const imgUploadRow  = document.getElementById('imgUploadRow');
-const imgUrlRow     = document.getElementById('imgUrlRow');
-const nfStatus      = document.getElementById('nf-status');
-
-let newsImageSource = 'upload'; // 'upload' | 'url'
-
-function showNewsAlert(ok, text){
-    if (!newsAlert) return;
-    newsAlert.innerHTML = `<div class="news-alert ${ok ? 'ok' : 'err'}">${ok ? '✓' : '✕'} ${text}</div>`;
-    setTimeout(() => { newsAlert.innerHTML = ''; }, 5000);
-}
-
-function setPreview(src){
-    if (!imgPreview) return;
-    if (!src){
-        imgPreview.classList.add('empty');
-        imgPreview.innerHTML = '<span>Нет картинки</span>';
-        return;
-    }
-    imgPreview.classList.remove('empty');
-    imgPreview.innerHTML = `<img src="${src}" alt="Превью">`;
-}
-
-/* Переключение источника картинки */
-document.querySelectorAll('.img-source-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-        document.querySelectorAll('.img-source-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        newsImageSource = tab.dataset.src;
-        if (newsImageSource === 'upload'){
-            imgUploadRow.style.display = '';
-            imgUrlRow.style.display = 'none';
-            // Если до этого был URL — очищаем
-            if (nfUrl && !nfUrl.value.startsWith('uploads/news/')) {
-                nfImage.value = '';
-                setPreview('');
-            }
-        } else {
-            imgUploadRow.style.display = 'none';
-            imgUrlRow.style.display = '';
-            nfImage.value = nfUrl ? nfUrl.value : '';
-            setPreview(nfImage.value);
-        }
-    });
-});
-
-/* Превью при выборе URL */
-if (nfUrl) {
-    nfUrl.addEventListener('input', () => {
-        nfImage.value = nfUrl.value.trim();
-        setPreview(nfImage.value);
-    });
-}
-
-/* Загрузка файла */
-if (nfFile) {
-    nfFile.addEventListener('change', async () => {
-        if (!nfFile.files || !nfFile.files[0]) return;
-        const file = nfFile.files[0];
-        if (file.size > 5 * 1024 * 1024) {
-            showNewsAlert(false, 'Файл слишком большой (макс. 5 МБ)');
-            nfFile.value = '';
-            return;
-        }
-        const fd = new FormData();
-        fd.append('image', file);
-        fd.append('action', 'upload');
-        try {
-            newsSubmitBtn.disabled = true;
-            const origText = newsSubmitBtn.innerHTML;
-            newsSubmitBtn.innerHTML = '<span class="spinner"></span>Загрузка...';
-            const res = await fetch('news.php?action=upload', { method: 'POST', body: fd });
-            const data = await res.json();
-            newsSubmitBtn.disabled = false;
-            newsSubmitBtn.innerHTML = origText;
-            if (data.ok) {
-                nfImage.value = data.url;
-                setPreview(data.url);
-                showNewsAlert(true, 'Картинка загружена');
-            } else {
-                showNewsAlert(false, data.error || 'Ошибка загрузки');
-                nfFile.value = '';
-            }
-        } catch (err) {
-            newsSubmitBtn.disabled = false;
-            newsSubmitBtn.innerHTML = origText;
-            showNewsAlert(false, 'Ошибка сети: ' + err.message);
-            nfFile.value = '';
-        }
-    });
-}
-
-/* Загрузка списка новостей */
-async function loadNews(){
-    if (!newsList) return;
-    try {
-        const res = await fetch('news.php?action=all');
-        const data = await res.json();
-        if (!data.ok) {
-            newsList.innerHTML = `<div class="empty">Ошибка: ${data.error}</div>`;
-            return;
-        }
-        const items = data.items || [];
-        if (newsCounter) newsCounter.textContent = `Всего: ${items.length}`;
-        if (items.length === 0) {
-            newsList.innerHTML = `<div class="empty" style="grid-column:1/-1">Новостей пока нет. Создайте первую!</div>`;
-            return;
-        }
-        newsList.innerHTML = items.map(n => {
-            const statusBadge = n.status === 'published'
-                ? '<span class="badge status-published">Опубликовано</span>'
-                : '<span class="badge status-draft">Черновик</span>';
-            const date = n.created_at ? new Date(n.created_at).toLocaleDateString('ru-RU') : '';
-            const imgHtml = n.image
-                ? `<img src="${n.image}" alt="${escapeHtml(n.title)}" loading="lazy">`
-                : `<div class="placeholder">Нет картинки</div>`;
-            const actions = [];
-            if (NEWS_PERMS.edit) {
-                if (n.status === 'published') {
-                    actions.push(`<button class="btn btn-warn" data-act="unpublish" data-id="${n.id}">Снять с публикации</button>`);
-                } else {
-                    actions.push(`<button class="btn btn-accept" data-act="publish" data-id="${n.id}">Опубликовать</button>`);
-                }
-                actions.push(`<button class="btn btn-ghost" data-act="edit" data-id="${n.id}">Редактировать</button>`);
-            }
-            if (NEWS_PERMS.del) {
-                actions.push(`<button class="btn btn-reject" data-act="delete" data-id="${n.id}">Удалить</button>`);
-            }
-            return `
-                <div class="news-card" data-id="${n.id}">
-                    <div class="news-card-img">${imgHtml}</div>
-                    <div class="news-card-body">
-                        <div class="news-card-title">${escapeHtml(n.title)}</div>
-                        ${n.subtitle ? `<div class="news-card-sub">${escapeHtml(n.subtitle)}</div>` : ''}
-                        <div class="news-card-meta">
-                            <span>${date}</span>
-                            ${statusBadge}
-                        </div>
-                    </div>
-                    ${actions.length ? `<div class="news-card-actions">${actions.join('')}</div>` : ''}
-                </div>
-            `;
-        }).join('');
-
-        // Навешиваем обработчики на кнопки карточек
-        newsList.querySelectorAll('[data-act]').forEach(btn => {
-            btn.addEventListener('click', async (e) => {
-                e.stopPropagation();
-                const id = btn.dataset.id;
-                const act = btn.dataset.act;
-                if (act === 'edit') {
-                    editNews(id);
-                } else if (act === 'delete') {
-                    if (!confirm('Удалить новость? Это действие нельзя отменить.')) return;
-                    await apiNews('delete', { id });
-                } else if (act === 'publish') {
-                    await apiNews('toggle_status', { id, status: 'published' });
-                } else if (act === 'unpublish') {
-                    await apiNews('toggle_status', { id, status: 'draft' });
-                }
-            });
-        });
-    } catch (err) {
-        newsList.innerHTML = `<div class="empty" style="grid-column:1/-1">Ошибка загрузки: ${err.message}</div>`;
-    }
-}
-
-function escapeHtml(s){
-    return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-
-async function apiNews(action, payload){
-    try {
-        const res = await fetch('news.php?action=' + action, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
-        });
-        const data = await res.json();
-        if (data.ok) {
-            showNewsAlert(true, 'Сохранено');
-            loadNews();
-        } else {
-            showNewsAlert(false, data.error || 'Ошибка');
-        }
-        return data;
-    } catch (err) {
-        showNewsAlert(false, 'Ошибка сети: ' + err.message);
-        return { ok: false };
-    }
-}
-
-function editNews(id){
-    if (!newsForm) return;
-    fetch('news.php?action=all')
-        .then(r => r.json())
-        .then(data => {
-            if (!data.ok) return;
-            const n = (data.items || []).find(x => String(x.id) === String(id));
-            if (!n) return;
-            nfId.value = n.id;
-            nfTitle.value = n.title || '';
-            nfSubtitle.value = n.subtitle || '';
-            nfDescription.value = n.description || '';
-            nfStatus.value = n.status || 'draft';
-
-            // Определяем источник картинки
-            const img = n.image || '';
-            if (img.startsWith('uploads/news/')) {
-                newsImageSource = 'upload';
-                document.querySelectorAll('.img-source-tab').forEach(t => t.classList.toggle('active', t.dataset.src === 'upload'));
-                imgUploadRow.style.display = '';
-                imgUrlRow.style.display = 'none';
-            } else if (img) {
-                newsImageSource = 'url';
-                document.querySelectorAll('.img-source-tab').forEach(t => t.classList.toggle('active', t.dataset.src === 'url'));
-                imgUploadRow.style.display = 'none';
-                imgUrlRow.style.display = '';
-                nfUrl.value = img;
-            } else {
-                newsImageSource = 'upload';
-                document.querySelectorAll('.img-source-tab').forEach(t => t.classList.toggle('active', t.dataset.src === 'upload'));
-                imgUploadRow.style.display = '';
-                imgUrlRow.style.display = 'none';
-            }
-            nfImage.value = img;
-            setPreview(img);
-
-            newsFormTitle.textContent = 'Редактирование: ' + n.title;
-            newsModeBadge.textContent = 'изменение';
-            newsModeBadge.style.background = 'var(--blue-light)';
-            newsModeBadge.style.color = '#1e4f9a';
-            newsSubmitBtn.textContent = 'Сохранить изменения';
-
-            switchView('news', true);
-            newsForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-}
-
-function resetNewsForm(){
-    if (!newsFormEl) return;
-    newsFormEl.reset();
-    nfId.value = '';
-    nfImage.value = '';
-    setPreview('');
-    if (nfFile) nfFile.value = '';
-    if (nfUrl) nfUrl.value = '';
-    newsImageSource = 'upload';
-    document.querySelectorAll('.img-source-tab').forEach(t => t.classList.toggle('active', t.dataset.src === 'upload'));
-    imgUploadRow.style.display = '';
-    imgUrlRow.style.display = 'none';
-    newsFormTitle.textContent = 'Новая публикация';
-    newsModeBadge.textContent = 'создание';
-    newsModeBadge.style.background = '';
-    newsModeBadge.style.color = '';
-    newsSubmitBtn.textContent = 'Создать';
-}
-
-if (newsCancelBtn) newsCancelBtn.addEventListener('click', resetNewsForm);
-
-if (newsFormEl) {
-    newsFormEl.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const payload = {
-            id:          nfId.value,
-            title:       nfTitle.value.trim(),
-            subtitle:    nfSubtitle.value.trim(),
-            description: nfDescription.value.trim(),
-            image:       nfImage.value.trim(),
-            status:      nfStatus.value,
-        };
-        if (!payload.title) {
-            showNewsAlert(false, 'Укажите заголовок');
-            return;
-        }
-        newsSubmitBtn.disabled = true;
-        const origText = newsSubmitBtn.innerHTML;
-        newsSubmitBtn.innerHTML = '<span class="spinner"></span>Сохранение...';
-        const data = await apiNews('save', payload);
-        newsSubmitBtn.disabled = false;
-        newsSubmitBtn.innerHTML = origText;
-        if (data && data.ok) resetNewsForm();
-    });
-}
-
-// Первичная загрузка
-if (newsList) loadNews();
 </script>
 </body>
 </html>

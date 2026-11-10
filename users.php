@@ -7,7 +7,6 @@ const USERS_FILE = __DIR__ . '/Сотрудники.json';
 
 const ROLE_LABELS = [
     'admin'    => 'Администратор',
-    'editor'   => 'Редактор',
     'operator' => 'Оператор',
     'viewer'   => 'Наблюдатель',
 ];
@@ -15,7 +14,7 @@ const ROLE_LABELS = [
 const VIEW_LABELS = [
     'dashboard' => 'Dashboard',
     'orders'    => 'Orders',
-    'news'      => 'Новости',
+    'cart'      => 'Корзина',
     'staff'     => 'Сотрудники',
     'settings'  => 'Settings',
 ];
@@ -24,24 +23,19 @@ const ACTION_LABELS = [
     'orders.view'   => 'Просмотр заявок',
     'orders.accept' => 'Принимать заявки',
     'orders.reject' => 'Отклонять заявки',
-    'news.view'     => 'Просмотр новостей',
-    'news.create'   => 'Создавать новости',
-    'news.edit'     => 'Редактировать новости',
-    'news.delete'   => 'Удалять новости',
+    'cart.view'     => 'Просмотр корзин',
     'staff.manage'  => 'Управление сотрудниками',
 ];
 
 const ROLE_PRESETS = [
-    'admin'    => ['dashboard','orders','news','staff','settings'],
-    'editor'   => ['dashboard','news'],
-    'operator' => ['dashboard','orders'],
+    'admin'    => ['dashboard','orders','cart','staff','settings'],
+    'operator' => ['dashboard','orders','cart'],
     'viewer'   => ['dashboard'],
 ];
 
 const ROLE_ACTION_PRESETS = [
-    'admin'    => ['orders.view','orders.accept','orders.reject','news.view','news.create','news.edit','news.delete','staff.manage'],
-    'editor'   => ['news.view','news.create','news.edit','news.delete'],
-    'operator' => ['orders.view','orders.accept','orders.reject'],
+    'admin'    => ['orders.view','orders.accept','orders.reject','cart.view','staff.manage'],
+    'operator' => ['orders.view','orders.accept','orders.reject','cart.view'],
     'viewer'   => ['orders.view'],
 ];
 
@@ -98,7 +92,6 @@ function users_upsert(array $data): array {
         is_array($data['actions'] ?? null) ? $data['actions'] : []
     ));
 
-    // Админ всегда имеет полный доступ
     if ($role === 'admin') {
         $views = array_keys(VIEW_LABELS);
         $actions = array_keys(ACTION_LABELS);
@@ -136,8 +129,8 @@ function users_delete(string $username, string $currentUser): array {
     if ($username === $currentUser) {
         return ['ok' => false, 'error' => 'Нельзя удалить свою учётную запись.'];
     }
-    if ($all[$username]['role'] === 'admin') {
-        $admins = array_filter($all, fn($u) => $u['role'] === 'admin');
+    if (($all[$username]['role'] ?? '') === 'admin') {
+        $admins = array_filter($all, fn($u) => ($u['role'] ?? '') === 'admin');
         if (count($admins) <= 1) {
             return ['ok' => false, 'error' => 'Нельзя удалить последнего администратора.'];
         }

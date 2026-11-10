@@ -44,11 +44,15 @@
   .logo-img{height:28px;width:auto;object-fit:contain;mix-blend-mode:multiply;}
   .logo{font-size:17px;font-weight:600;letter-spacing:-.02em}
   .logo span{color:var(--muted)}
-  .nav-right{display:flex;align-items:center;gap:20px}
+  .nav-right{display:flex;align-items:center;gap:12px}
   .nav-links{display:flex;gap:24px;font-size:14px;color:var(--muted)}
   .nav-links a:hover{color:var(--accent)}
   .nav-contacts{font-size:14px;font-weight:500;color:#fff;background:var(--accent);border-radius:980px;padding:8px 16px;transition:background .2s;}
   .nav-contacts:hover{background:var(--accent-hover)}
+  .nav-cart{position:relative;background:rgba(255,255,255,.6);border:1px solid var(--line);border-radius:980px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);transition:background .2s,border-color .2s;backdrop-filter:blur(10px)}
+  .nav-cart:hover{background:var(--accent-light);border-color:transparent;color:var(--accent-hover)}
+  .cart-count{position:absolute;top:-4px;right:-4px;background:var(--accent);color:#fff;font-size:11px;font-weight:600;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px;transition:transform .2s}
+  .cart-count.pop{transform:scale(1.25)}
   @media(max-width:768px){.nav-links{display:none}}
 
   .hero{padding:100px 0 60px;text-align:center}
@@ -95,10 +99,13 @@
   .card-meta{font-size:14px;color:var(--muted)}
   .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
   .badge{font-size:12px;color:var(--muted);background:var(--bg-glass);padding:4px 10px;border-radius:8px;}
-  .card-bottom{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--line);}
+  .card-bottom{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--line);gap:10px;flex-wrap:wrap}
   .price{font-size:22px;font-weight:600;letter-spacing:-.02em}
+  .card-actions{display:flex;gap:8px;align-items:center}
   .buy-btn{background:var(--accent);color:#fff;border:none;border-radius:980px;padding:10px 20px;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;transition:background .2s;}
   .buy-btn:hover{background:var(--accent-hover)}
+  .btn-cart{background:rgba(255,255,255,.9);border:1px solid var(--accent);color:var(--accent);border-radius:980px;padding:10px 14px;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;transition:background .2s,color .2s;display:flex;align-items:center;gap:6px}
+  .btn-cart:hover{background:var(--accent);color:#fff}
   .empty{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--muted)}
 
   .faq{display:flex;flex-direction:column;gap:0}
@@ -134,7 +141,15 @@
     .feature-num{position:relative;right:auto;bottom:auto;margin-top:16px;font-size:80px}
   }
 
-  /* ---------- Модальное окно заказа ---------- */
+  /* ---------- VK embed ---------- */
+  .vk-embed-wrap{background:rgba(251,251,253,.8);border:1px solid var(--line);border-radius:24px;overflow:hidden;backdrop-filter:blur(20px);box-shadow:0 10px 40px rgba(0,0,0,.02)}
+  .vk-embed-frame{background:#fff;overflow:hidden;border-radius:24px 24px 0 0;min-height:640px}
+  .vk-embed-footer{padding:14px 20px;border-top:1px solid var(--line);text-align:right;font-size:14px}
+  .vk-embed-footer a{color:var(--accent);font-weight:500}
+  .vk-embed-footer a:hover{text-decoration:underline}
+  @media(max-width:640px){.vk-embed-frame{min-height:540px}}
+
+  /* ---------- Модальное окно ---------- */
   .modal-overlay{
     position:fixed;inset:0;z-index:1000;
     background:rgba(0,0,0,0.4);
@@ -206,6 +221,25 @@
   .success-state h3{margin-bottom:10px;}
   .success-state p{font-size:15px;color:var(--muted);line-height:1.6;margin-bottom:24px;}
   .success-state .btn-primary{width:100%;}
+
+  /* ---------- Корзина ---------- */
+  .cart-total{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-top:1px solid var(--line);margin-top:8px;font-size:16px}
+  .cart-total strong{font-size:20px;letter-spacing:-.02em}
+  .cart-row{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+  .cart-row:last-child{border-bottom:none}
+  .cart-row-img{width:56px;height:56px;border-radius:10px;background:#f5f5f7;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+  .cart-row-img img{max-width:100%;max-height:100%;object-fit:contain}
+  .cart-row-info{flex:1;min-width:0}
+  .cart-row-title{font-size:14px;font-weight:600;line-height:1.3}
+  .cart-row-meta{font-size:12px;color:var(--muted)}
+  .cart-row-price{font-size:14px;font-weight:600;white-space:nowrap}
+  .cart-qty{display:flex;align-items:center;gap:6px;margin-top:4px}
+  .cart-qty button{width:24px;height:24px;border:1px solid var(--line);border-radius:6px;background:#fff;cursor:pointer;font-family:inherit;line-height:1;color:var(--text)}
+  .cart-qty button:hover{background:var(--accent-light);border-color:transparent;color:var(--accent-hover)}
+  .cart-qty span{font-size:13px;min-width:20px;text-align:center}
+  .cart-remove{background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:4px;line-height:1}
+  .cart-remove:hover{color:#e5484d}
+  .cart-empty{text-align:center;padding:40px 20px;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -225,10 +259,14 @@
     <div class="nav-links">
       <a href="#features">Возможности</a>
       <a href="#catalog">Каталог</a>
-	  <a href="#news">Новости</a>
+      <a href="#news">Новости</a>
       <a href="#faq">Вопросы</a>
     </div>
     <div class="nav-right">
+      <button id="cartBtn" class="nav-cart" aria-label="Корзина">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span id="cartCount" class="cart-count">0</span>
+      </button>
       <a href="#contacts" class="nav-contacts">Контакты</a>
     </div>
   </nav>
@@ -314,221 +352,17 @@
   </div>
 </section>
 
-<!-- ===== НОВОСТИ ===== -->
-<section id="news" style="padding:80px 5vw;background:#fff">
-  <div style="max-width:1200px;margin:0 auto">
-    <div style="text-align:center;margin-bottom:40px">
-      <div style="font-size:13px;color:#2bba5e;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">Блог</div>
-      <h2 style="font-size:36px;font-weight:600;letter-spacing:-.02em">Новости</h2>
-      <p style="color:#6e6e73;margin-top:8px;font-size:15px">Свежие поступления, акции и полезные статьи</p>
-    </div>
-    <div id="news-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px">
-      <div style="grid-column:1/-1;text-align:center;padding:40px;color:#6e6e73">Загрузка новостей...</div>
+<!-- ===== НОВОСТИ (ВК notebookgarant) ===== -->
+<section id="news" class="reveal">
+  <div class="wrap">
+    <div class="rubric">Новости</div>
+    <h2 class="section-title">Что нового</h2>
+    <div class="vk-embed-wrap">
+      <div class="vk-embed-frame" id="vk_community"></div>
+      </div>
     </div>
   </div>
 </section>
-
-<!-- Модалка новости -->
-<div id="news-modal" class="news-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="news-modal-title">
-  <div class="news-modal">
-    <button class="news-modal-close" id="news-modal-close" aria-label="Закрыть">×</button>
-    <div class="news-modal-image" id="news-modal-image"></div>
-    <div class="news-modal-body">
-      <div class="news-modal-date" id="news-modal-date"></div>
-      <h2 class="news-modal-title" id="news-modal-title"></h2>
-      <div class="news-modal-subtitle" id="news-modal-subtitle"></div>
-      <div class="news-modal-description" id="news-modal-description"></div>
-    </div>
-  </div>
-</div>
-
-<style>
-.news-card-site{
-  background:#fff;border:1px solid #e5e5e7;border-radius:20px;overflow:hidden;
-  transition:transform .2s,box-shadow .2s;cursor:pointer;
-}
-.news-card-site:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.08)}
-.news-card-site-img{aspect-ratio:16/10;background:#f5f5f7;overflow:hidden}
-.news-card-site-img img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
-.news-card-site:hover .news-card-site-img img{transform:scale(1.05)}
-.news-card-site-body{padding:20px}
-.news-card-site-date{font-size:12px;color:#6e6e73;margin-bottom:8px}
-.news-card-site-title{font-size:18px;font-weight:600;letter-spacing:-.01em;line-height:1.3;margin-bottom:8px}
-.news-card-site-sub{font-size:14px;color:#6e6e73;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-
-/* Модалка */
-.news-modal-overlay{
-  position:fixed;inset:0;z-index:1000;
-  background:rgba(0,0,0,.55);
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  display:none;align-items:center;justify-content:center;
-  padding:20px;opacity:0;transition:opacity .25s ease;
-}
-.news-modal-overlay.open{display:flex;opacity:1}
-.news-modal{
-  background:#fff;border-radius:24px;max-width:760px;width:100%;
-  max-height:calc(100vh - 40px);overflow:hidden;
-  display:flex;flex-direction:column;
-  box-shadow:0 30px 90px rgba(0,0,0,.25);
-  transform:translateY(16px) scale(.98);
-  transition:transform .3s cubic-bezier(.22,.61,.36,1);
-  position:relative;
-}
-.news-modal-overlay.open .news-modal{transform:none}
-.news-modal-close{
-  position:absolute;top:16px;right:16px;z-index:2;
-  width:40px;height:40px;border:none;
-  background:rgba(255,255,255,.9);
-  border-radius:50%;font-size:24px;color:#1d1d1f;
-  cursor:pointer;line-height:1;
-  display:flex;align-items:center;justify-content:center;
-  transition:background .2s,transform .2s;
-  box-shadow:0 4px 12px rgba(0,0,0,.1);
-}
-.news-modal-close:hover{background:#fff;transform:scale(1.05)}
-.news-modal-image{
-  width:100%;aspect-ratio:16/9;background:#f5f5f7;
-  overflow:hidden;flex-shrink:0;
-}
-.news-modal-image img{width:100%;height:100%;object-fit:cover}
-.news-modal-image.empty{display:flex;align-items:center;justify-content:center;color:#6e6e73;font-size:14px}
-.news-modal-body{
-  padding:32px 36px 36px;overflow-y:auto;
-}
-.news-modal-date{
-  font-size:13px;color:#6e6e73;margin-bottom:10px;
-  text-transform:uppercase;letter-spacing:.05em;font-weight:500;
-}
-.news-modal-title{
-  font-size:28px;font-weight:600;letter-spacing:-.02em;line-height:1.25;
-  margin-bottom:12px;color:#1d1d1f;
-}
-.news-modal-subtitle{
-  font-size:17px;color:#6e6e73;line-height:1.5;margin-bottom:24px;
-  padding-bottom:24px;border-bottom:1px solid #e5e5e7;
-}
-.news-modal-description{
-  font-size:16px;line-height:1.7;color:#1d1d1f;
-  white-space:pre-wrap;word-wrap:break-word;
-}
-.news-modal-description p{margin-bottom:12px}
-
-@media(max-width:640px){
-  .news-modal-body{padding:24px 20px 28px}
-  .news-modal-title{font-size:22px}
-  .news-modal-subtitle{font-size:15px}
-  .news-modal-description{font-size:15px}
-}
-</style>
-
-<script>
-(function(){
-  const list = document.getElementById('news-list');
-  if (!list) return;
-
-  const modal       = document.getElementById('news-modal');
-  const modalClose  = document.getElementById('news-modal-close');
-  const modalImage  = document.getElementById('news-modal-image');
-  const modalDate   = document.getElementById('news-modal-date');
-  const modalTitle  = document.getElementById('news-modal-title');
-  const modalSub    = document.getElementById('news-modal-subtitle');
-  const modalDesc   = document.getElementById('news-modal-description');
-
-  function escapeHtml(s){
-    return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  }
-
-  function formatDate(iso){
-    if (!iso) return '';
-    try {
-      const d = new Date(iso);
-      if (isNaN(d.getTime())) return iso;
-      return d.toLocaleDateString('ru-RU', { day:'2-digit', month:'long', year:'numeric' })
-        + ' · ' + d.toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit' });
-    } catch(e) { return iso; }
-  }
-
-  function openNews(id){
-    fetch('news.php?action=view&id=' + encodeURIComponent(id))
-      .then(r => r.json())
-      .then(data => {
-        if (!data.ok || !data.item) {
-          alert('Не удалось загрузить новость');
-          return;
-        }
-        const n = data.item;
-        modalTitle.textContent = n.title || '';
-        modalSub.textContent = n.subtitle || '';
-        modalDate.textContent = formatDate(n.created_at);
-
-        if (n.image) {
-          modalImage.classList.remove('empty');
-          modalImage.innerHTML = `<img src="${escapeHtml(n.image)}" alt="${escapeHtml(n.title)}">`;
-        } else {
-          modalImage.classList.add('empty');
-          modalImage.innerHTML = '<span>Нет картинки</span>';
-        }
-
-        // Описание: переносы строк → параграфы
-        const desc = (n.description || '').trim();
-        if (desc) {
-          modalDesc.innerHTML = desc.split(/\n\s*\n/).map(p => `<p>${escapeHtml(p).replace(/\n/g,'<br>')}</p>`).join('');
-        } else {
-          modalDesc.innerHTML = '<p style="color:#6e6e73;font-style:italic">Описание отсутствует</p>';
-        }
-
-        modal.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      })
-      .catch(() => alert('Ошибка загрузки новости'));
-  }
-
-  function closeModal(){
-    modal.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  modalClose.addEventListener('click', closeModal);
-  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
-  });
-
-  // Загрузка списка
-  fetch('news.php?action=list')
-    .then(r => r.json())
-    .then(data => {
-      if (!data.ok || !data.items || data.items.length === 0) {
-        list.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#6e6e73">Новостей пока нет</div>';
-        return;
-      }
-      list.innerHTML = data.items.map(n => {
-        const date = n.created_at ? new Date(n.created_at).toLocaleDateString('ru-RU', {day:'2-digit',month:'long',year:'numeric'}) : '';
-        const img = n.image
-          ? `<img src="${n.image}" alt="${escapeHtml(n.title)}" loading="lazy">`
-          : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#6e6e73">Нет картинки</div>`;
-        return `
-          <article class="news-card-site" data-id="${n.id}">
-            <div class="news-card-site-img">${img}</div>
-            <div class="news-card-site-body">
-              <div class="news-card-site-date">${date}</div>
-              <h3 class="news-card-site-title">${escapeHtml(n.title)}</h3>
-              ${n.subtitle ? `<p class="news-card-site-sub">${escapeHtml(n.subtitle)}</p>` : ''}
-            </div>
-          </article>
-        `;
-      }).join('');
-
-      // Клик по карточке → открыть модалку
-      list.querySelectorAll('.news-card-site').forEach(card => {
-        card.addEventListener('click', () => openNews(card.dataset.id));
-      });
-    })
-    .catch(() => {
-      list.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#6e6e73">Не удалось загрузить новости</div>';
-    });
-})();
-</script>
 
 <section id="faq" class="reveal">
   <div class="wrap">
@@ -546,10 +380,6 @@
       <details>
         <summary>Какая гарантия?</summary>
         <p>12 месяцев на все устройства и на работы по ремонту. Гарантия покрывает аппаратные неисправности, не связанные с механическими повреждениями и попаданием влаги.</p>
-      </details>
-      <details>
-        <summary>Есть доставка?</summary>
-        <p>Да, по городу и в регионы. Самовывоз — бесплатно. Сроки и стоимость доставки уточняет менеджер при подтверждении заявки.</p>
       </details>
     </div>
   </div>
@@ -581,7 +411,7 @@
           <img src="icons/home.png" alt="Адрес" class="contact-icon">
           <h3>Сервисный центр</h3>
         </div>
-        <p>г. Якутск, ул. Кулаковского, д. 28</p>
+        <p>г. Якутск, ул. Ойунского, д. 6/1</p>
         <p style="margin-top:8px">По предварительной записи</p>
       </div>
     </div>
@@ -593,7 +423,7 @@
     <div class="foot-links">
       <a href="#features">Возможности</a>
       <a href="#catalog">Каталог</a>
-	  <a href="#news">Новости</a>
+      <a href="#news">Новости</a>
       <a href="#faq">Вопросы</a>
       <a href="#contacts">Контакты</a>
       <a href="terms.html">Согласие на обработку ПД</a>
@@ -603,7 +433,7 @@
   </div>
 </footer>
 
-<!-- Модальное окно заказа -->
+<!-- Модальное окно одиночного заказа -->
 <div class="modal-overlay" id="orderModal" role="dialog" aria-modal="true" aria-labelledby="orderTitle">
   <div class="modal">
     <button class="modal-close" id="modalClose" aria-label="Закрыть">×</button>
@@ -655,6 +485,62 @@
       <h3>Заявка отправлена!</h3>
       <p id="successText">Спасибо! Мы свяжемся с вами в ближайшее время для подтверждения заказа.</p>
       <button class="btn-primary" id="successClose">Готово</button>
+    </div>
+  </div>
+</div>
+
+<!-- Модалка корзины -->
+<div class="modal-overlay" id="cartModal" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+  <div class="modal" style="max-width:560px">
+    <button class="modal-close" id="cartModalClose" aria-label="Закрыть">×</button>
+    <h3 id="cartTitle">Корзина</h3>
+    <p class="modal-sub">Проверьте состав и оформите заявку</p>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-total" id="cartTotalRow" style="display:none">
+      <span>Итого:</span>
+      <strong id="cartTotalValue">0 ₽</strong>
+    </div>
+
+    <div id="cartFormState">
+      <form id="cartOrderForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cartLastName">Фамилия <span class="req">*</span></label>
+            <input type="text" id="cartLastName" placeholder="Иванов">
+          </div>
+          <div class="form-group">
+            <label for="cartFirstName">Имя <span class="req">*</span></label>
+            <input type="text" id="cartFirstName" placeholder="Иван">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="cartPhone">Телефон <span class="req">*</span></label>
+          <input type="tel" id="cartPhone" placeholder="+7 (___) ___-__-__">
+        </div>
+        <div class="form-group">
+          <label for="cartEmail">Почта <span class="req">*</span></label>
+          <input type="email" id="cartEmail" placeholder="example@mail.ru">
+        </div>
+        <div class="form-error" id="cartFormError"></div>
+        <div class="checkbox-group" id="cartConsentGroup">
+          <input type="checkbox" id="cartConsent">
+          <label for="cartConsent">
+            Я даю согласие на обработку персональных данных и принимаю
+            <a href="terms.html" target="_blank" rel="noopener">Согласие</a> и
+            <a href="privacy.html" target="_blank" rel="noopener">Политику конфиденциальности</a>.
+          </label>
+        </div>
+        <button type="submit" class="btn-primary" id="cartSubmitBtn">Оформить заявку</button>
+      </form>
+    </div>
+
+    <div id="cartSuccess" class="success-state" style="display:none">
+      <div class="success-icon">✓</div>
+      <h3>Заявка отправлена!</h3>
+      <p>Мы свяжемся с вами для подтверждения заказа.</p>
+      <button class="btn-primary" id="cartSuccessClose">Готово</button>
     </div>
   </div>
 </div>
@@ -739,7 +625,12 @@ function render(){
         </div>
         <div class="card-bottom">
           <span class="price">${fmt(p.price)}</span>
-          <button class="buy-btn" data-id="${p.id}">Купить</button>
+          <div class="card-actions">
+            <button class="btn-cart" data-id="${p.id}" title="Добавить в корзину" aria-label="В корзину">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            </button>
+            <button class="buy-btn" data-id="${p.id}">Купить</button>
+          </div>
         </div>
       </article>
     `;
@@ -754,7 +645,186 @@ resetBtn.addEventListener('click', () => {
   render();
 });
 
-/* ---------- Модальное окно ---------- */
+/* ---------- КОРЗИНА ---------- */
+const CART_KEY = 'garant_cart_v1';
+const cartBtn = document.getElementById('cartBtn');
+const cartCount = document.getElementById('cartCount');
+
+function cartLoad(){
+  try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); }
+  catch(e){ return []; }
+}
+function cartSave(items){
+  localStorage.setItem(CART_KEY, JSON.stringify(items));
+  cartUpdateCount();
+}
+function cartUpdateCount(){
+  const items = cartLoad();
+  const qty = items.reduce((s,i)=>s+i.qty, 0);
+  if (cartCount){
+    cartCount.textContent = qty;
+    cartCount.classList.toggle('pop', qty > 0);
+    setTimeout(()=>cartCount.classList.remove('pop'), 250);
+  }
+}
+function cartAdd(product){
+  const items = cartLoad();
+  const found = items.find(i => i.id === product.id);
+  if (found) found.qty += 1;
+  else items.push({...product, qty: 1});
+  cartSave(items);
+}
+function cartRemove(id){
+  cartSave(cartLoad().filter(i => i.id !== id));
+}
+function cartSetQty(id, qty){
+  const items = cartLoad();
+  const it = items.find(i => i.id === id);
+  if (!it) return;
+  it.qty = Math.max(1, qty|0);
+  cartSave(items);
+}
+function cartTotal(){
+  return cartLoad().reduce((s,i)=>s+i.price*i.qty, 0);
+}
+
+cartUpdateCount();
+
+const cartModal = document.getElementById('cartModal');
+const cartModalClose = document.getElementById('cartModalClose');
+const cartItemsEl = document.getElementById('cartItems');
+const cartTotalRow = document.getElementById('cartTotalRow');
+const cartTotalValue = document.getElementById('cartTotalValue');
+const cartFormState = document.getElementById('cartFormState');
+const cartSuccess = document.getElementById('cartSuccess');
+const cartSuccessClose = document.getElementById('cartSuccessClose');
+const cartFormError = document.getElementById('cartFormError');
+const cartConsentGroup = document.getElementById('cartConsentGroup');
+const cartSubmitBtn = document.getElementById('cartSubmitBtn');
+
+function cartRender(){
+  const items = cartLoad();
+  if (!items.length){
+    cartItemsEl.innerHTML = '<div class="cart-empty">Корзина пуста</div>';
+    cartTotalRow.style.display = 'none';
+    return;
+  }
+  cartTotalRow.style.display = '';
+  cartTotalValue.textContent = fmt(cartTotal());
+  cartItemsEl.innerHTML = items.map(i => `
+    <div class="cart-row">
+      <div class="cart-row-img"><img src="${i.image}" alt=""></div>
+      <div class="cart-row-info">
+        <div class="cart-row-title">${i.model}</div>
+        <div class="cart-row-meta">${i.memory} · ${i.color}</div>
+        <div class="cart-qty">
+          <button type="button" data-act="dec" data-id="${i.id}">−</button>
+          <span>${i.qty}</span>
+          <button type="button" data-act="inc" data-id="${i.id}">+</button>
+        </div>
+      </div>
+      <div class="cart-row-price">${fmt(i.price * i.qty)}</div>
+      <button type="button" class="cart-remove" data-act="del" data-id="${i.id}" title="Удалить">×</button>
+    </div>
+  `).join('');
+}
+
+cartItemsEl.addEventListener('click', e => {
+  const btn = e.target.closest('[data-act]');
+  if (!btn) return;
+  const id = +btn.dataset.id;
+  const act = btn.dataset.act;
+  if (act === 'inc') cartSetQty(id, (cartLoad().find(i=>i.id===id)?.qty||1) + 1);
+  if (act === 'dec') cartSetQty(id, (cartLoad().find(i=>i.id===id)?.qty||1) - 1);
+  if (act === 'del') cartRemove(id);
+  cartRender();
+});
+
+function openCart(){
+  cartFormState.style.display = '';
+  cartSuccess.style.display = 'none';
+  document.getElementById('cartOrderForm').reset();
+  cartFormError.classList.remove('show');
+  cartConsentGroup.classList.remove('error');
+  cartRender();
+  cartModal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeCart(){
+  cartModal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+cartBtn.addEventListener('click', openCart);
+cartModalClose.addEventListener('click', closeCart);
+cartModal.addEventListener('click', e => { if (e.target === cartModal) closeCart(); });
+cartSuccessClose.addEventListener('click', closeCart);
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && cartModal.classList.contains('open')) closeCart();
+});
+
+document.getElementById('cartOrderForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  cartFormError.classList.remove('show');
+  cartConsentGroup.classList.remove('error');
+
+  const lastName = document.getElementById('cartLastName').value.trim();
+  const firstName = document.getElementById('cartFirstName').value.trim();
+  const phone = document.getElementById('cartPhone').value.trim();
+  const email = document.getElementById('cartEmail').value.trim();
+  const consent = document.getElementById('cartConsent').checked;
+
+  const errs = [];
+  if (!lastName) errs.push('Укажите фамилию');
+  if (!firstName) errs.push('Укажите имя');
+  const phoneClean = phone.replace(/[\s\-()]/g,'');
+  if (!/^(\+7|8)?\d{10}$/.test(phoneClean)) errs.push('Некорректный телефон');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) errs.push('Некорректная почта');
+  if (!consent) { cartConsentGroup.classList.add('error'); errs.push('Нужно согласие'); }
+
+  const items = cartLoad();
+  if (!items.length) errs.push('Корзина пуста');
+
+  if (errs.length){
+    cartFormError.textContent = errs.join('. ');
+    cartFormError.classList.add('show');
+    return;
+  }
+
+  cartSubmitBtn.disabled = true;
+  const orig = cartSubmitBtn.textContent;
+  cartSubmitBtn.textContent = 'Отправка…';
+
+  try {
+    const res = await fetch('order.php', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        lastName, firstName, phone, email, consent: true,
+        items: items.map(i => ({ model:i.model, memory:i.memory, color:i.color, price:i.price, qty:i.qty }))
+      })
+    });
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error || 'Ошибка');
+    fetch('cart.php?action=save', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ customer: `${lastName} ${firstName}`, phone, email, items })
+    }).catch(()=>{});
+    cartSave([]);
+    cartRender();
+    cartFormState.style.display = 'none';
+    cartSuccess.style.display = '';
+  } catch(err){
+    cartFormError.textContent = err.message;
+    cartFormError.classList.add('show');
+  } finally {
+    cartSubmitBtn.disabled = false;
+    cartSubmitBtn.textContent = orig;
+  }
+});
+
+/* ---------- Одиночное модальное окно (Купить) ---------- */
 const orderModal = document.getElementById('orderModal');
 const modalClose = document.getElementById('modalClose');
 const orderForm = document.getElementById('orderForm');
@@ -780,19 +850,16 @@ function openModal(product){
   document.body.style.overflow = 'hidden';
   setTimeout(() => document.getElementById('lastName').focus(), 120);
 }
-
 function closeModal(){
   orderModal.classList.remove('open');
   document.body.style.overflow = '';
 }
-
 function clearErrors(){
   formError.classList.remove('show');
   formError.textContent = '';
   orderForm.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
   consentGroup.classList.remove('error');
 }
-
 function showError(msg){
   formError.textContent = msg;
   formError.classList.add('show');
@@ -800,9 +867,19 @@ function showError(msg){
 }
 
 grid.addEventListener('click', e => {
-  const btn = e.target.closest('.buy-btn');
-  if (!btn) return;
-  const p = products.find(x => x.id === +btn.dataset.id);
+  const add = e.target.closest('.btn-cart');
+  if (add){
+    const p = products.find(x => x.id === +add.dataset.id);
+    if (p){
+      cartAdd(p);
+      add.innerHTML = '✓';
+      setTimeout(()=>add.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>`, 900);
+    }
+    return;
+  }
+  const buy = e.target.closest('.buy-btn');
+  if (!buy) return;
+  const p = products.find(x => x.id === +buy.dataset.id);
   if (p) openModal(p);
 });
 
@@ -815,7 +892,6 @@ document.addEventListener('keydown', e => {
 });
 successClose.addEventListener('click', closeModal);
 
-/* ---------- Валидация и отправка ---------- */
 function validate(){
   clearErrors();
   let valid = true;
@@ -898,7 +974,6 @@ orderForm.addEventListener('submit', e => {
     });
 });
 
-// Сброс ошибки при вводе
 ['lastName','firstName','phone','email'].forEach(id => {
   document.getElementById(id).addEventListener('input', function(){
     this.classList.remove('invalid');
@@ -924,8 +999,57 @@ render();
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  }, { threshold: 0.01, rootMargin: '0px 0px -40px 0px' });
   items.forEach(el => observer.observe(el));
+
+  // Страховка: если элемент уже в вьюпорте при загрузке — показать сразу
+  const revealVisible = () => {
+    items.forEach(el => {
+      if (el.classList.contains('is-visible')) return;
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0){
+        el.classList.add('is-visible');
+      }
+    });
+  };
+  revealVisible();
+  window.addEventListener('load', revealVisible);
+  setTimeout(revealVisible, 300);
+})();
+
+/* ---------- VK виджет сообщества notebookgarant ----------
+   ВАЖНО: чтобы виджет заработал, замените VK_GROUP_ID на ЧИСЛОВОЙ ID
+   сообщества https://vk.com/notebookgarant.
+   Где узнать: откройте сообщество → «Управление» → «Настройки» → «ID сообщества».
+   Либо посмотрите в адресной строке на странице статистики: vk.com/stats?gid=XXXXX
+   Пока ID = 0, виджет не отображается (это безопасно, сайт работает).
+------------------------------------------------------------- */
+(function(){
+  var VK_GROUP_ID = 72258761; // <-- ЗАМЕНИТЕ НА ЧИСЛО (например, 12345678)
+
+  if (!VK_GROUP_ID) {
+    var el = document.getElementById('vk_community');
+    if (el) el.innerHTML = '<div style="padding:40px;text-align:center;color:#6e6e73;font-size:14px">' +
+      'Виджет ВКонтакте не настроен. Укажите числовой ID сообщества в коде страницы.<br>' +
+      'Сообщество: <a href="https://vk.com/notebookgarant" target="_blank" rel="noopener" style="color:#2bba5e;font-weight:500">vk.com/notebookgarant</a></div>';
+    return;
+  }
+
+  window.vkAsyncInit = function(){
+    VK.Widgets.Group("vk_community", {
+      mode: 4,
+      width: "auto",
+      height: 640,
+      color1: 'FFFFFF',
+      color2: '1D1D1F',
+      color3: '2BBA5E'
+    }, VK_GROUP_ID);
+  };
+  var s = document.createElement('script');
+  s.src = 'https://vk.com/js/api/openapi.js?169';
+  s.async = true;
+  s.onload = function(){ if (window.vkAsyncInit) window.vkAsyncInit(); };
+  document.head.appendChild(s);
 })();
 </script>
 </body>

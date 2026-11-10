@@ -25,8 +25,7 @@ app.use(session({
 // Статика (index.html сайта + admin.html)
 app.use(express.static(join(__dirname, 'public')));
 
-// API
-app.post('/api/order', orderRouter);
+// API — ИСПРАВЛЕНО: убрана дублирующая строка app.post('/api/order', orderRouter)
 app.use('/api/order', orderRouter);
 app.use('/api/cart',  cartRouter);
 app.use('/api/admin', adminRouter);
@@ -39,7 +38,17 @@ app.get('/download/:file', (req, res) => {
   res.download(join(__dirname, req.params.file));
 });
 
+// Обработка ошибок
+app.use((err, req, res, next) => {
+  console.error('Ошибка:', err);
+  res.status(500).json({ ok: false, error: 'Внутренняя ошибка сервера' });
+});
+
 ensureAdmin(); // создаёт admin/change_me_please при первом запуске
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Гарант: http://localhost:${PORT}`));
+app.listen(PORT, () => {
+  console.log(`✓ Гарант запущен: http://localhost:${PORT}`);
+  console.log(`✓ Админка: http://localhost:${PORT}/admin.html`);
+  console.log(`✓ Логин: admin / change_me_please`);
+});

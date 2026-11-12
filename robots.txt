@@ -1,0 +1,102 @@
+# ============================================================
+# Гарант — robots.txt
+# https://garant03.infinityfree.io/robots.txt
+# ============================================================
+
+User-agent: *
+Disallow: /admin.php
+Disallow: /login.php
+Disallow: /order.php
+Disallow: /cart.php
+Disallow: /config.php
+Disallow: /auth.php
+Disallow: /functions.php
+Disallow: /users.php
+Disallow: /users.json
+Disallow: /partials/
+Disallow: /views/
+Disallow: /Заявки.txt
+Disallow: /Корзины.json
+Disallow: /assets/
+Disallow: /icons/
+Disallow: /images/
+Disallow: /*?view=
+Disallow: /*?logout=
+Disallow: /*?action=
+
+Sitemap: https://garant03.infinityfree.io/sitemap.xml
+
+# ------------------------------------------------------------
+# Yandex
+# ------------------------------------------------------------
+User-agent: Yandex
+Disallow: /admin.php
+Disallow: /login.php
+Disallow: /order.php
+Disallow: /cart.php
+Disallow: /config.php
+Disallow: /auth.php
+Disallow: /functions.php
+Disallow: /users.php
+Disallow: /users.json
+Disallow: /partials/
+Disallow: /views/
+Disallow: /Заявки.txt
+Disallow: /Корзины.json
+Disallow: /assets/
+Disallow: /icons/
+Disallow: /images/
+Disallow: /*?view=
+Disallow: /*?logout=
+Disallow: /*?action=
+Clean-param: view&logout&action
+Sitemap: https://garant03.infinityfree.io/sitemap.xml
+
+# ------------------------------------------------------------
+# Google
+# ------------------------------------------------------------
+User-agent: Googlebot
+Disallow: /admin.php
+Disallow: /login.php
+Disallow: /order.php
+Disallow: /cart.php
+Disallow: /config.php
+Disallow: /auth.php
+Disallow: /functions.php
+Disallow: /users.php
+Disallow: /users.json
+Disallow: /partials/
+Disallow: /views/
+Disallow: /Заявки.txt
+Disallow: /Корзины.json
+Disallow: /assets/
+Disallow: /icons/
+Disallow: /images/
+Disallow: /*?view=
+Disallow: /*?logout=
+Disallow: /*?action=
+Sitemap: https://garant03.infinityfree.io/sitemap.xml
+
+# ------------------------------------------------------------
+# Мусорные краулеры
+# ------------------------------------------------------------
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
